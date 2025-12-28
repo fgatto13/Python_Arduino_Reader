@@ -1,7 +1,7 @@
 # Python Arduino Reader
 A small project meant to make an Arduino UNO R4 Minima communicate with Python via pyserial and to store read data inside a MySQL database.
 ## Circuit
-<img src="ino-code/circuit_image-2.png" style="height: 40dvh; width: auto;"/>
+<img src="assets/circuit_image-2.png" style="height: 40dvh; width: auto;"/>
 The board used for this project is an Arduino UNO R4 Minima, which is the successor to the widely popular UNO R3, and the circuit is as basic as it gets: 
 
 -   one arduino board
