@@ -1,7 +1,9 @@
 # Python Arduino Reader
 A small project meant to make an Arduino UNO R4 Minima communicate with Python via pyserial and to store read data inside a MySQL database.
+
+An interactive version of this README is available [here](https://fgatto13.github.io/Python_Arduino_Reader/).
 ## Circuit
-<img src="assets/circuit_image-2.png" style="height: 40dvh; width: auto;"/>
+<img src="assets/circuit_image-2.png" style="max-height: 40dvh; width: auto;"/>
 The board used for this project is an Arduino UNO R4 Minima, which is the successor to the widely popular UNO R3, and the circuit is as basic as it gets: 
 
 -   one arduino board
@@ -19,7 +21,7 @@ The retrieved data gets then handled in our Python app.
 
 The core version of this circuit is presented here:
 
-<img src="assets/circuit_image.png" style="height: 40dvh; width: auto;"/>
+<img src="assets/circuit_image.png" style="max-height: 40dvh; width: auto;"/>
 
 To make this Arduino circuit work, the core code is quite simple, as shown in the following block.
 ```c++
