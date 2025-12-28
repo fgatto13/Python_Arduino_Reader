@@ -18,6 +18,7 @@ Tl;dr the sensor outputs a voltage level between 0 and 5v, directly proportional
 The retrieved data gets then handled in our Python app.
 
 The core version of this circuit is presented here:
+
 <img src="assets/circuit_image.png" style="height: 40dvh; width: auto;"/>
 
 To make this Arduino circuit work, the core code is quite simple, as shown in the following block.
