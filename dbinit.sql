@@ -5,18 +5,17 @@ USE arduinodatadb;
 CREATE TABLE device (
     device_id INT AUTO_INCREMENT PRIMARY KEY,
     device_name VARCHAR(255) NOT NULL,
-    port VARCHAR(255) NOT NULL,
-    baud INT NOT NULL,
+    baud INT NOT NULL DEFAULT 9600,
     is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
     deleted_at DATETIME NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (device_name)
 );
 
 CREATE TABLE reads (
-    regtime DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    id INT AUTO_INCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     device_id INT NOT NULL,
-    readData INT,
-    PRIMARY KEY (id),
+    read_data INT,
+    read_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (device_id) REFERENCES device(device_id)
 );
