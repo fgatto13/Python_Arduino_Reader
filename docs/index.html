@@ -2,11 +2,106 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <main></main>
+    <main>
+        <h1>Welcome to the Documentation</h1>
+        <p>This is the main page of the documentation.</p>
+        <h2>Arduino Circuit Overview</h2>
+        <img src="../assets/circuit_image-2.png" alt="arduino circuit" id="arduino"></img>
+        <label for="arduino">This is the Arduino circuit image.</label>
+        <p>
+            The scope of this arduino circuit is to read water level data, by using a <strong>water level sensor</strong>.
+            <br>
+            The circuit is pretty simple, it just needs ground, power and data pins connected to the arduino board.
+            <ul>
+                <li>
+                    <strong>Ground pin</strong>: Connects to the GND pin on the Arduino board.
+                </li>
+                <li>
+                    <strong>Power pin</strong>: Connects to a digital pin on the Arduino board, in this case pin 7.
+                </li>
+                <li>
+                    <strong>Data pin</strong>: Connects to an analog input pin on the Arduino board, here being A0.
+                </li>
+            </ul>
+            The reason behind using a digital pin is to prevent the degradation of the sensor, since by using a digital pin we can turn off the power to the sensor when not in use.
+        </p>
+        <h2>Arduino code Overview</h2>
+        <p>
+            The Arduino code is responsible for reading the water level data from the sensor and sending it to the connected device via serial communication.
+            <br><br>
+            First, the code initializes the necessary pins.
+            <br>
+            <pre style="border-radius: 5px;">
+                <code class="language-c" style="font-size: smaller;">
+// Pin definitions
+const int waterSensorPowerPin = 7;  // Pin to power the water sensor
+const int waterSensorPin = A0;      // Analog pin connected to the water sensor
+// Since the max value should be around 520, we set the threshold at 500
+const int upperThreshold = 500;     // Threshold to trigger alert
+                </code>
+            </pre>
+            Then, we setup the input and output pins.
+            <pre style="border-radius: 5px;">
+                <code class="language-c" style="font-size: smaller;">
+void setup() {
+  Serial.begin(9600);
+  
+  // Set the power pin as output
+  pinMode(waterSensorPowerPin, OUTPUT);
+  
+  // Ensure the sensor is powered off initially
+  digitalWrite(waterSensorPowerPin, LOW);
+
+  // Set the alert led pin as output
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+                </code>
+            </pre>
+            In the main loop, we read the water level and print it to the serial monitor every 2 seconds.
+            <br>
+            To do that, we create a function called <code>readWaterLevel()</code> that handles the reading of the sensor and the alert mechanism.
+            <pre style="border-radius: 5px;">
+                <code class="language-c" style="font-size: smaller;">
+
+void loop() {
+    // We create a function to read the water level and print it
+    Serial.print("Water Level: ");
+    Serial.println(readWaterLevel());
+    // Wait for 2 seconds before the next reading
+    delay(2000);
+}
+
+int readWaterLevel() {
+    // Power on the water sensor
+    digitalWrite(waterSensorPowerPin, HIGH);
+    // Wait for the sensor to stabilize
+    delay(100); 
+    // Read the water sensor value
+    int sensorValue = analogRead(waterSensorPin);
+    // Check if the water level is above a certain threshold
+    if (sensorValue > upperThreshold) {
+        digitalWrite(LED_BUILTIN, HIGH); // Turn on alert LED
+    } else {
+        digitalWrite(LED_BUILTIN, LOW); // Turn off alert LED
+    }
+    // Power off the water sensor to prolong its life
+    digitalWrite(waterSensorPowerPin, LOW);
+    return sensorValue;
+}
+            </code>
+        </pre>
+        That's it! This is the basic overview of the Arduino circuit and code for reading water level data using a water level sensor.
+        </p>
+        <h1>Python program</h1>
+        The Python program is responsible for reading the water level data from the serial port, storing it in a MySQL database, and displaying it in a graphical user interface (GUI) using Tkinter.
+    </main>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-c.min.js"></script>
 </html>
