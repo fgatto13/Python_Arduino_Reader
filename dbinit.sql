@@ -12,7 +12,7 @@ CREATE TABLE device (
     UNIQUE (device_name)
 );
 
-CREATE TABLE reads (
+CREATE TABLE read_data (
     id INT AUTO_INCREMENT PRIMARY KEY,
     device_id INT NOT NULL,
     read_data INT,

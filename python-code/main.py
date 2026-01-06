@@ -1,14 +1,13 @@
 from DbManager import DbManager
 from Device import Device
+from dotenv import load_dotenv
 
 def main():
+    load_dotenv()
     # Initialize database manager
     db_manager = DbManager()
-    
-    # Create a device instance
-    device = Device(name="Arduino Uno", baud=9600, port="COM5")
-    
-    device.read_data()
-    
+    db_manager.print_env_variables()
+    db_manager.close()
+
 if __name__ == "__main__":
     main()
