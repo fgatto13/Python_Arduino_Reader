@@ -1,6 +1,8 @@
 # Python Arduino Reader
 A small project meant to make an Arduino UNO R4 Minima communicate with Python via pyserial and to store read data inside a MySQL database.
 
+**Note** This version of the application (found in main.py) is only compatible with MacOS and Linux OS, since the interactive menu used is not compatible with Windows.
+
 An interactive version of this README is available [here](https://fgatto13.github.io/Python_Arduino_Reader/).
 ## Circuit
 <img src="docs/assets/circuit_image-2.png" style="max-height: 40dvh; width: auto;"/>

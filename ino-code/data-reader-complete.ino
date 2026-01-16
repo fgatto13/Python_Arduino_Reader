@@ -32,7 +32,7 @@ void loop() {
     Serial.print("Water Level: ");
     Serial.println(readWaterLevel());
     // Wait for 2 seconds before the next reading
-    delay(2000);
+    delay(1000);
 }
 
 int readWaterLevel() {

@@ -32,16 +32,23 @@ def main():
             print('Find port '+ port.device)
         # Create a terminal menu for user to select a port
         options = [port.device for port in ports]
-        terminal_menu = TerminalMenu(options)
-        menu_entry_index = terminal_menu.show()
-        assert isinstance(menu_entry_index, int)
-        print(f"You have selected {options[menu_entry_index]}")
+        selected_port_index = create_menu(options)
         # after the port gets selected, we create a device instance with the selected port
-        device = Device(device_id=1, name='INO_TEST', baud=9600, port=options[menu_entry_index])
-        print(f'Reading data from device on port {device.port}...')
-        data = device.read_data()
-        if not data:
-            print('No data read from device.')
+        device = Device(device_id=1, name='INO_TEST', baud=9600, port=options[selected_port_index])
+        print("What do you want to do?")
+        print("1. Turn on/off the LED")
+        print("2. Read water level data from the device")
+        print("3. Exit")
+        choice = int(input("Enter your choice (1-3): "))
+        match choice:
+            case 1:
+                print(port.hwid.split('SER=')[-1].split(' LOCATION=')[0])
+                device.read_data()
+            case 2:
+                print(f'Reading data from device on port {device.port}...')
+                data = device.read_water_level()
+                if not data:
+                    print('No data read from device.')
     else:
         print('No ports found')
 
