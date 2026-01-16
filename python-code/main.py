@@ -12,6 +12,13 @@ def find_serial_ports():
         return []
     return ports
 
+def create_menu(options: list[str]) -> int:
+    terminal_menu = TerminalMenu(options)
+    menu_entry_index = terminal_menu.show()
+    assert isinstance(menu_entry_index, int)
+    print(f"You have selected {options[menu_entry_index]}")
+    return menu_entry_index
+
 def main():
     load_dotenv()
     # Initialize database manager
