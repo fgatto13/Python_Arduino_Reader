@@ -57,4 +57,14 @@ Then, the following queries were defined to communicate with the database:
 
 The database connection and management was done via Python, covered in the following section.
 ## Data reading and Python communication
-First of all, to 
+First of all, I needed to make sure that I could establish a communication channel, so the `serial` module was used to detect available ports to start the communication.
+<img src="docs/assets/main_menu.png" style="max-height: 40dvh; width: auto;"/>
+When selecting the corresponding port, a `Device` object was created:
+
+```python
+device = Device(device_id=1, name='INO_TEST', baud=9600, port=options[menu_entry_index])
+```
+With that, we could start reading data from Arduino using the `read_data()` function from the `Device` class.
+
+When selecting the device, the communication starts:
+<img src="docs/assets/selected_device.png" style="max-height: 40dvh; width: auto;"/>
