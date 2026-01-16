@@ -1,5 +1,6 @@
 from DbManager import DbManager
-from Device import Device
+from SimpleDevice import SimpleDevice
+from WaterDevice import WaterDevice
 from dotenv import load_dotenv
 from simple_term_menu import TerminalMenu # https://github.com/IngoMeyer441/simple-term-menu
 import serial
@@ -33,8 +34,6 @@ def main():
         # Create a terminal menu for user to select a port
         options = [port.device for port in ports]
         selected_port_index = create_menu(options)
-        # after the port gets selected, we create a device instance with the selected port
-        device = Device(device_id=1, name='INO_TEST', baud=9600, port=options[selected_port_index])
         print("What do you want to do?")
         print("1. Turn on/off the LED")
         print("2. Read water level data from the device")
@@ -42,11 +41,13 @@ def main():
         choice = int(input("Enter your choice (1-3): "))
         match choice:
             case 1:
+                device = SimpleDevice(device_id=1, name='INO_TEST', baud=9600, port=options[selected_port_index])
                 print(port.hwid.split('SER=')[-1].split(' LOCATION=')[0])
                 device.read_data()
             case 2:
+                device = WaterDevice(device_id=1, name='INO_TEST', baud=9600, port=options[selected_port_index])
                 print(f'Reading data from device on port {device.port}...')
-                data = device.read_water_level()
+                data = device.read_data()
                 if not data:
                     print('No data read from device.')
     else:
