@@ -7,8 +7,6 @@ CREATE TABLE device (
     device_name VARCHAR(255) NOT NULL,
     baud INT NOT NULL DEFAULT 9600,
     is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
-    deleted_at DATETIME NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (device_name)
 );
 
