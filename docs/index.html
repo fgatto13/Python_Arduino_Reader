@@ -122,12 +122,14 @@ int readWaterLevel() {
                 We use <code>pyserial</code> for serial communication, 
                 <code>mysql-connector-python</code> for MySQL database interaction, 
                 <code>python-dotenv</code> for loading environment variables from a .env file, 
-                and <code>tkinter</code> for creating the GUI.
+                <code>pyserial</code> for serial communication,
+                <code>pandas</code> for easier data visualization from the database,
+                and <code>simple-term-menu</code> to create an interactive terminal menu (only works on MacOS and Linux).
                 <br><br>
                 You can install these dependencies using pip:
                 <pre style="border-radius: 5px;">
                     <code class="language-bash" style="font-size: smaller;">
-pip install pyserial mysql-connector-python python-dotenv
+pip install pyserial mysql-connector-python python-dotenv pandas simple-term-menu
                     </code>
                 </pre>
             </p>
@@ -136,6 +138,57 @@ pip install pyserial mysql-connector-python python-dotenv
                 We store sensitive information such as database credentials in a .env file.
                 <br><br>
                 In the project, there already is a <code>.env.template</code> file that you can use as a template.
+                <pre style="border-radius: 5px;">
+                    <code class="language-plaintext" style="font-size: smaller;">
+DB_HOST=your_database_host
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_NAME=your_database_name
+                    </code>
+                </pre>
+                Rename this file to <code>.env</code> and fill in your database credentials.
+            </p>
+            <h2>Step 3: Database Initialization</h2>
+            <p>
+                Before running the Python program, we need to initialize the database.
+                <br><br>
+                You can do this by executing the <code>dbinit.sql</code> script in your MySQL database.
+                We first start by creating the database:
+                <pre style="border-radius: 5px;">
+                    <code class="language-sql" style="font-size: smaller;">
+CREATE DATABASE your_database_name;
+USE your_database_name;
+                    </code>
+                </pre>
+                Then, we define the <code>Device</code> table:
+                <pre style="border-radius: 5px;">
+                    <code class="language-sql" style="font-size: smaller;">
+CREATE TABLE Device (
+    device_id INT AUTO_INCREMENT PRIMARY KEY,
+    device_name VARCHAR(255) NOT NULL,
+    baud INT NOT NULL DEFAULT 9600,
+    is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    UNIQUE (device_name)
+);
+                    </code>
+                </pre>
+            </p>
+            <h2>Step 4: Python Code</h2>
+            <p>
+                We now can define our classes.
+                <br><br>
+                <ul>
+                    <li><code>Device</code>: Blueprint of any connected device, it is an abstract class.</li>
+                    <li><code>WaterDevice</code>: Inherits from <code>Device</code>, represents an Arduino water level sensor device.</li>
+                    <li><code>SimpleDevice</code>: Inherits from <code>Device</code>, represents a generic device that turns on and off the LED based on user input.</li>
+                    <li><code>DbManager</code>: Manages the connection and operations with the MySQL database.</li>
+                </ul>
+                Finally, everything is tied together in the <code>main.py</code> file, which handles user interaction, device management, and data reading/storage.
+            </p>
+            <img src="assets/main_menu.png" alt="main menu" id="python"></img>
+            <label for="python">This is the main menu of the Python program.</label>
+            <img src="assets/selected_device.png" alt="selected_device" id="python_2"></img>
+            <label for="python_2">This is the selected device menu of the Python program.</label>
             </section>
             </main>
         </body>

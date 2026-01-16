@@ -9,11 +9,3 @@ CREATE TABLE device (
     is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
     UNIQUE (device_name)
 );
-
-CREATE TABLE read_data (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    device_id INT NOT NULL,
-    read_data INT,
-    read_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (device_id) REFERENCES device(device_id)
-);
